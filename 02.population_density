@@ -3,15 +3,17 @@
 # A package is needed for point pattern analysis
 # install.packages("spatstat")
 library(spatstat)
+#without quotes since we've already downloaded it in R
 
 # let's use the bei data:
 # data description:
 # https://CRAN.R-project.org/package=spatstat
-
+#vignette in CRAN is used to explain some additional staff in the package and simplify the usage
 bei
 
 # plotting the data
 plot(bei)
+
 
 # changing dimension - cex
 plot(bei, cex=.2)
@@ -34,12 +36,17 @@ plot(elevation2)
 
 # passing from points to a countinuous surface
 densitymap <- density(bei)
+#density is a funtion of spatstat
 plot(densitymap)
 points(bei, cex=.2)
 
 # http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
+# color ramp is the legend
+#capital letters are mendatory
 
 cl <- colorRampPalette(c("black", "red", "orange", "yellow"))(100)
+#the end number is the gradients 
+#we can put even 3, the more the graient the more the precision
 plot(densitymap, col=cl)
 
 cl <- colorRampPalette(c("black", "red", "orange", "yellow"))(4)
@@ -54,13 +61,34 @@ elev <- bei.extra[[1]] # bei.extra$elev
 plot(elev)
 
 # multiframe
+#multiframre is an image in which we can put inside several plot
+#i can put the elevation and the density map
+#in this multiframe we have one raw of maps and two columns
+
+#par function (multiframe with 1 raw and 2 columns) 
+#we need to concatenate the elements using the c function 
+#(elements of an arey that's why we should keep it together)
 par(mfrow=c(1,2))
 plot(densitymap)
+#we have density map on one side
 plot(elev)
+#on the other column we now have elevation
+#we have opened multiframe, inside the ultiframe we put the density map and the elevation
+#give some explanation to this density
+#lower density of the tree is relater to the higher elevation
 
+
+#exercise where you made a new multiframe with two images on top of the other
 par(mfrow=c(2,1))
 plot(densitymap)
 plot(elev)
+
+#EXERCISE: plot a multiframe with two different color palette
+cl <- colorRampPalette(c("darkmagenta", "deeppink1", "khaki", "salmon"))(100)
+cl2 <-  colorRampPalette(c("black", "red", "yellow"))(100)
+par(mfrow=c(1,2))
+plot(elevation2, col=cl)
+plot(densitymap, col=cl2)
 
 par(mfrow=c(1,3))
 plot(bei)
