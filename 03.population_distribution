@@ -1,0 +1,8 @@
+#we use the pacage spatstat
+#we are going to install
+#terra
+#sdm speacies distribution modeling
+#sdm: in a graph there are some space were i cannot arrive, thus i can use predictor
+#to build a percentage model
+install.packages("sdm")
+install.packages("terra")
