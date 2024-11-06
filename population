@@ -1,0 +1,92 @@
+#population composed by individuals of the same speaces
+#density: how many individuals are in a certain place
+#distribution. the two parameters are stricltly related
+#then next step
+#communities
+#ecosystem
+
+#MULTIVARIATE ANALYSIS
+#We have a big multidimensional table of species and we want to lower the amount of these dimension
+#in the interested site (area) 
+#we divide the area in square (plot)
+#we have three pllot to deal with PLOT1 PLOT2 PLOT3
+#first: parnassius guccinii butterfly . P1:13, P2:1 P3:2
+#second: orchys flower: P1:15, P2:2, P3:3 
+#Third: larix decidua: P1:3, P2:10, P3:8
+#in the last plot the pattern is different
+#butterfly and flowers are more related to eachother than the trees
+#we can do a matrix of the plots
+
+#we have several plots
+#axis1
+#axis2
+#we've several individuals distributed in a highly correlated system
+#x axis is containing 50% of the all individual
+#same for y
+#the first xis is component1 which is actually containing 90% of original rate
+#second component is containing 10%
+#we pass to the component1 which is just one axis 
+#we don't have x and y anymore but
+#component1 with 90% of the individuals
+#we reduce the dimension
+#this is called
+#PRINCIPAL COMPONENT ANALYSIS
+
+#multivariate 
+
+
+library(vegan)
+#library doesnt need quotes since we installed the package 
+
+data(dune)
+head(dune)
+#head shows the first six line
+#another manner is to do
+View(dune)
+
+#decorana: detrended correspondence analysis
+#principal component analysis but powerfull when the range of data are quite disperse
+#this functio compact the data
+ord <- decorana(dune)
+#we assigned the function to ord
+ord
+#we're going to pass from the original seto to four axis
+#lenght of each axis is written in the Axis lenght
+#lenght menas the amount of range represented by each axis
+#aim: what is the percentage of the original range (variance) incorporated in just two axis
+#the maximum amount of axis we can use is three
+
+ldc1 =  3.7004 
+ldc2 =  3.1166 
+ldc3 = 1.30055
+ldc4 = 1.47888
+
+#how to calculate the percentage
+
+total = ldc1 + ldc2 + ldc3 + ldc4
+total
+
+#proportion
+pldc1 = ldc1  / total
+pldc2 = ldc2  / total
+pldc3 = ldc3  / total
+pldc4 = ldc4  / total
+
+#percentages
+percldc1 = ldc1 * 100 / total
+percldc2 = ldc2 * 100 / total
+percldc3 = ldc3 * 100 / total
+percldc4 = ldc4 * 100 / total
+
+
+percldc1
+percldc2
+
+#final set of two axis using 71% of variability
+percldc1 + percldc2
+#plot the name of the analysis
+plot(ord) 
+#black numbers ae the original plot
+#species living together
+
+#better to use "assign" rather than eual when we have a function
